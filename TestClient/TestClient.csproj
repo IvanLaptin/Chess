@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3360859-FDEB-46A6-A156-E77D1D92B4C9}</ProjectGuid>
+    <ProjectGuid>{41BC7665-08B2-4913-AEFD-C06916086A08}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LogicLevel</RootNamespace>
-    <AssemblyName>LogicLevel</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>TestClient</RootNamespace>
+    <AssemblyName>TestClient</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NetWork\Server.cs" />
+    <Compile Include="Network\Client.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LogicLevel\LogicLevel.csproj">
+      <Project>{c3360859-fdeb-46a6-a156-e77d1d92b4c9}</Project>
+      <Name>LogicLevel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetworkLevel\NetworkLevel.csproj">
       <Project>{d362b199-85eb-48c1-ba84-8f46d42442b9}</Project>
       <Name>NetworkLevel</Name>
