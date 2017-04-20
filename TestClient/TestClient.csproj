@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataLevel\DataLevel.csproj">
+      <Project>{96c3bdf5-cfa7-4c57-9ca7-842edb72e0fb}</Project>
+      <Name>DataLevel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LogicLevel\LogicLevel.csproj">
       <Project>{c3360859-fdeb-46a6-a156-e77d1d92b4c9}</Project>
       <Name>LogicLevel</Name>
