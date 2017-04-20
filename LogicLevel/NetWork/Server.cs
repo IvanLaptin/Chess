@@ -24,8 +24,12 @@ namespace LogicLevel.NetWork
             try
             {
                 //IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.0.116"), 2017);
+<<<<<<< HEAD
                 //IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.81"), 2017); // Ivan
                 IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.75"), 2017);   //Den
+=======
+                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.21"), 2017);
+>>>>>>> develop
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(addr);
                 serverSocket.Listen(5);

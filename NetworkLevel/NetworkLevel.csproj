@@ -41,9 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Messages\Message.cs" />
+    <Compile Include="Messages\MessageFinishGame.cs" />
+    <Compile Include="Messages\MessageLogIn.cs" />
+    <Compile Include="Messages\MessageLogInAnswer.cs" />
+    <Compile Include="Messages\MessageLogOut.cs" />
     <Compile Include="Messages\MessageRegistration.cs" />
     <Compile Include="Messages\MessageRegistrationAnswer.cs" />
+    <Compile Include="Messages\MessageStartGameOnline.cs" />
+    <Compile Include="Messages\MessageStartGameOnlineAnswer.cs" />
+    <Compile Include="Messages\MessageStartTheGameWithTheBot.cs" />
     <Compile Include="Messages\MessageType.cs" />
+    <Compile Include="Messages\MessageMove.cs" />
+    <Compile Include="Messages\MessageYourTurn.cs" />
+    <Compile Include="Messages\MoveType.cs" />
+    <Compile Include="Messages\StartAnswerType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="User.cs" />
