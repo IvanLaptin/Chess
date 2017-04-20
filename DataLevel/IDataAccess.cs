@@ -8,7 +8,7 @@ namespace DataLevel
 {
 	public interface IDataAccess
 	{
-		AccountProxy SignIn(string login, string password);
+		AccountProxy LogIn(string login, string password);
 		bool SignUp(string login, string password, string email, string fullname);
 
 

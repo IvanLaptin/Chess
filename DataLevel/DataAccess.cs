@@ -18,7 +18,7 @@ namespace DataLevel
 			authorization = new Authorization();
 		}
 
-		public AccountProxy SignIn(string login, string password)
+		public AccountProxy LogIn(string login, string password)
 		{
 			var acc = authorization.LogIn(login, password);
 			return new AccountProxy() { Id = acc.Id, Email = acc.Email, FullName = acc.FullName, Password = password };
