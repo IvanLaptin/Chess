@@ -13,7 +13,7 @@ namespace NetworkLevel.Messages
             get { return MessageType.Move; }
         }
 
-        public MoveType Type { get; set; }
+        public MoveType MoveType { get; set; }
 
     }
 }
