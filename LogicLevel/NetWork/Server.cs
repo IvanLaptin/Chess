@@ -7,12 +7,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using DataLevel;
 
 namespace LogicLevel.NetWork
 {
     public class Server
     {
         private Socket serverSocket;
+        private IDataAccess connection = new DataAccess();
 
         public void Start()
         {
@@ -23,13 +25,7 @@ namespace LogicLevel.NetWork
             }
             try
             {
-                //IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.0.116"), 2017);
-<<<<<<< HEAD
-                //IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.81"), 2017); // Ivan
-                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.75"), 2017);   //Den
-=======
-                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.21"), 2017);
->>>>>>> develop
+                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.69"), 2017);
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(addr);
                 serverSocket.Listen(5);
@@ -79,14 +75,10 @@ namespace LogicLevel.NetWork
                 var password = (message as MessageRegistration).Password;
                 var email = (message as MessageRegistration).Email;
                 var fullName = (message as MessageRegistration).FullName;
-
-
-
-                user.Send(new MessageRegistrationAnswer() { Answer = true });
+                var regResult = connection.SignUp(login, password, email, fullName);
+                user.Send(new MessageRegistrationAnswer() { Answer = regResult });
             }
         }
-
-        
 
         public void Stop()
         {

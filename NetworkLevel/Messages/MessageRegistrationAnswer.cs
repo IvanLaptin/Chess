@@ -10,9 +10,10 @@ namespace NetworkLevel.Messages
     {
         public override MessageType Type
         {
-            get { return MessageType.Registration; }
+            get { return MessageType.RegistrationAnswer; }
         }
 
         public bool Answer { get; set; }
+        public bool Reason { get; set; }
     }
 }

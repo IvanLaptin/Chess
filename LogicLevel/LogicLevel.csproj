@@ -49,6 +49,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataLevel\DataLevel.csproj">
+      <Project>{96c3bdf5-cfa7-4c57-9ca7-842edb72e0fb}</Project>
+      <Name>DataLevel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetworkLevel\NetworkLevel.csproj">
       <Project>{d362b199-85eb-48c1-ba84-8f46d42442b9}</Project>
       <Name>NetworkLevel</Name>
