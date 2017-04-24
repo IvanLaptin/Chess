@@ -12,8 +12,6 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
-			IDataAccess da = new DataAccess();
-			Console.WriteLine(da.LogIn("a", "aa").FullName); 
 
             Console.WriteLine("Press enter to connect");
             Console.ReadLine();
