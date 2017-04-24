@@ -126,6 +126,7 @@ namespace LogicLevel.NetWork
                 if (logInResult != null)
                 {
                     user.Send(new MessageLogInAnswer() { Answer = true, Login = logInResult.Login, Email = logInResult.Email, FullName = logInResult.FullName, ID = logInResult.Id });
+                    AccountList.Instance.Accounts.Add(new Account());
                 }
                 else
                 {
