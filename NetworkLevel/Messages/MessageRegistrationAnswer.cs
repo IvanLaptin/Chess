@@ -14,6 +14,11 @@ namespace NetworkLevel.Messages
         }
 
         public bool Answer { get; set; }
-        public bool Reason { get; set; }
+        public string Reason { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, {1}", Answer, Reason);
+        }
     }
 }
