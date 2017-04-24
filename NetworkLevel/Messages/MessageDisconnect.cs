@@ -6,7 +6,7 @@ using System.Text;
 namespace NetworkLevel.Messages
 {
     [Serializable]
-    class MessageDisconnect : Message
+     public class MessageDisconnect : Message
     {
         public override MessageType Type
         {

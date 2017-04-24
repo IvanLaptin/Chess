@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using DataLevel;
 using System.Text.RegularExpressions;
+using DataLevel.Model;
 
 namespace LogicLevel.NetWork
 {
@@ -65,7 +66,7 @@ namespace LogicLevel.NetWork
 
         private void OnUserDisconnected(User user, string reason)
         {
-           
+            
         }
 
         private void OnMessageReceived(User user, Message message)
@@ -110,6 +111,25 @@ namespace LogicLevel.NetWork
                 else
                 {
                     user.Send(new MessageRegistrationAnswer() { Answer = regResult, Reason = "login incorrect (less 3 symbols)" });
+                }
+            }
+            else if (message.Type == MessageType.Disconnect)
+            {
+                user.Disconnect("User exit");
+            }
+            else if (message.Type == MessageType.LogIn)
+            {
+                var login = (message as MessageLogIn).Login;
+                var password = (message as MessageLogIn).Password;
+                AccountProxy logInResult = null;
+                logInResult = connection.LogIn(login, password);
+                if (logInResult != null)
+                {
+                    user.Send(new MessageLogInAnswer() { Answer = true, Login = logInResult.Login, Email = logInResult.Email, FullName = logInResult.FullName, ID = logInResult.Id });
+                }
+                else
+                {
+                    user.Send(new MessageLogInAnswer() { Answer = false });
                 }
             }
         }
