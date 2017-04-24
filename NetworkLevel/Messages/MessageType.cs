@@ -9,7 +9,15 @@ namespace NetworkLevel.Messages
     public enum MessageType
     {
         Registration,
-        RegistrationAnswer
-
+        RegistrationAnswer,
+        LogIn,
+        LogInAnswer,
+        LogOut,
+        StartGameWithTheBot,
+        StartGameOnline,
+        StartGameOnlineAnswer,
+        Move,
+        FinishGame,
+        YourMove
     }
 }

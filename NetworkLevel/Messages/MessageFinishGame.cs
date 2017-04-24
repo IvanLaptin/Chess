@@ -6,14 +6,13 @@ using System.Text;
 namespace NetworkLevel.Messages
 {
     [Serializable]
-    public class MessageRegistrationAnswer : Message
+    public class MessageFinishGame : Message
     {
         public override MessageType Type
         {
-            get { return MessageType.RegistrationAnswer; }
+            get { return MessageType.FinishGame; }
         }
 
-        public bool Answer { get; set; }
-        public bool Reason { get; set; }
+        public User Winer { get; set; }
     }
 }
