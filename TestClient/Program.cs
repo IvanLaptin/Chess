@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TestClient.Network;
 using NetworkLevel.Messages;
+using DataLevel;
 
 namespace TestClient
 {
@@ -11,6 +12,9 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
+			IDataAccess da = new DataAccess();
+			Console.WriteLine(da.LogIn("a", "aa").FullName); 
+
             Console.WriteLine("Press enter to connect");
             Console.ReadLine();
 

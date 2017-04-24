@@ -20,8 +20,7 @@ namespace DataLevel
 
 		public AccountProxy LogIn(string login, string password)
 		{
-			var acc = authorization.LogIn(login, password);
-			return new AccountProxy() { Id = acc.Id, Email = acc.Email, FullName = acc.FullName, Password = password };
+			return authorization.LogIn(login, password);
 		}
 
 		public bool SignUp(string login, string password, string email, string fullname)
