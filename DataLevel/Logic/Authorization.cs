@@ -6,24 +6,22 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using DataLevel;
 
 namespace DataLevel.Logic
 {
 	class Authorization : IAuthorization
 	{
 
+
 		public AccountProxy LogIn(string login, string password)
 		{
-			SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-			builder.DataSource = "chesss.database.windows.net";
-			builder.UserID = "laptin";
-			builder.Password = "Qwerty777";
-			builder.InitialCatalog = "chessSql";
-			using (var connection = new SqlConnection(builder.ConnectionString))
+			using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
 			{
 				connection.Open();
 				StringBuilder sb = new StringBuilder();
-				sb.Append("INSERT INTO Account([Login], [Password])");
+				sb.Append(string.Format("SELECT [Id], [Login], [Password], [Email], [FullName]" +
+				"FROM [chessSql].[dbo].[Account] where [Login] = '{0}' or [Password] = '{1}';", login, password));
 				String sql = sb.ToString();
 
 				using (SqlCommand command = new SqlCommand(sql, connection))
@@ -32,7 +30,14 @@ namespace DataLevel.Logic
 					{
 						while (reader.Read())
 						{
-							return null;
+							AccountProxy account = new AccountProxy();
+							account.Id = reader.GetInt32(0);
+							account.Login = reader.GetString(1);
+							account.Password = reader.GetString(2);
+							account.Email = reader.GetString(3);
+							account.FullName = reader.GetString(4);
+
+							if (account.Login == login && account.Password == password) return account;
 						}
 					}
 				}
@@ -42,12 +47,7 @@ namespace DataLevel.Logic
 
 		public bool SignUp(string login, string password, string email, string fullname)
 		{
-			SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-			builder.DataSource = "chesss.database.windows.net";
-			builder.UserID = "laptin";
-			builder.Password = "Qwerty777";
-			builder.InitialCatalog = "chessSql";
-			using (var connection = new SqlConnection(builder.ConnectionString))
+			using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
 			{
 				connection.Open();
 				StringBuilder sb = new StringBuilder();
