@@ -23,7 +23,8 @@ namespace TestClient
 
             Console.WriteLine("Enter exit to exit");
 
-            client.Send(new MessageRegistration() { FullName = "Ivan Laptin", Email = "iv@n.gmail.com", Login = "Storm", Password = "111"});
+            //client.Send(new MessageRegistration() { FullName = "Ivan Laptin", Email = "ivan@gmail.com", Login = "Shtorm", Password = "111" });
+            client.Send(new MessageRegistration() { FullName = "Ivan Laptin", Email = "ivan@gmail.com", Login = "Shtorm", Password = "111111" });
             Console.ReadLine();
         }
 
@@ -39,7 +40,7 @@ namespace TestClient
                 case MessageType.Registration:
                     break;
                 case MessageType.RegistrationAnswer:
-                    Console.WriteLine("RegistrationAnswer - " + (message as MessageRegistrationAnswer).Answer);
+                    Console.WriteLine("RegistrationAnswer - " + (message as MessageRegistrationAnswer));
                     break;
                 case MessageType.LogIn:
                     break;
