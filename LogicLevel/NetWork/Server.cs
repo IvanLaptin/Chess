@@ -125,14 +125,33 @@ namespace LogicLevel.NetWork
                 logInResult = connection.LogIn(login, password);
                 if (logInResult != null)
                 {
-                    user.Send(new MessageLogInAnswer() { Answer = true, Login = logInResult.Login, Email = logInResult.Email, FullName = logInResult.FullName, ID = logInResult.Id });
-                    AccountList.Instance.Accounts.Add(new Account());
+                    user.Send(new MessageLogInAnswer() { Answer = true, Login = logInResult.Login, Email = logInResult.Email, FullName = logInResult.FullName, ID = logInResult.Id});
+                    AccountList.Instance.Accounts.Add(new Account() { User = user, Login = login, Email = logInResult.Email, FullName = logInResult.FullName, Id = logInResult.Id });
                 }
                 else
                 {
                     user.Send(new MessageLogInAnswer() { Answer = false });
                 }
             }
+            else if(message.Type == MessageType.LogOut)
+            {
+                var account = AccountList.Instance.Accounts.FirstOrDefault(x => x.User == user);
+                if(account != null)
+                {
+                    AccountList.Instance.Accounts.Remove(account);
+                }
+            }
+            else if(message.Type == MessageType.ChangePasswordSettings)
+            {
+                var account = AccountList.Instance.Accounts.FirstOrDefault(x => x.User == user);
+                if(account != null)
+                {
+                    //TODO CHANGE PASSWORD
+                }
+            }
+
+
+
         }
 
         public void Stop()
