@@ -27,7 +27,7 @@ namespace LogicLevel.NetWork
             }
             try
             {
-                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.97"), 2017);
+                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.64"), 2017);
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(addr);
                 serverSocket.Listen(5);
@@ -175,6 +175,10 @@ namespace LogicLevel.NetWork
                         }
                     }
                 }
+            }
+            else if(message.Type == MessageType.StartGameOnline)
+            {
+
             }
 
 
