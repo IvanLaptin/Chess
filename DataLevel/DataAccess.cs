@@ -27,5 +27,10 @@ namespace DataLevel
 		{
 			return authorization.SignUp(login, password, email, fullname);
 		}
+
+        public bool ChangePassword(string login, string password)
+        {
+            return authorization.ChangePassword(login, password);
+        }
 	}
 }

@@ -25,8 +25,12 @@ namespace TestClient
             Console.WriteLine("Enter exit to exit");
 
             //client.Send(new MessageRegistration() { FullName = "Ivan Laptin", Email = "ivan@gmail.com", Login = "Shtorm", Password = "111" });
-            //client.Send(new MessageRegistration() { FullName = "Ivan Laptin", Email = "ivan@gmail.com", Login = "Shtorm", Password = "111111" });
-            client.Send(new MessageLogIn() { Login = "Shtorm", Password = "111111" });
+            //client.Send(new MessageRegistration() { FullName = "RAMBO", Email = "rembo@gmail.com", Login = "rambo", Password = "111111" });
+            client.Send(new MessageLogIn() { Login = "rambo", Password = "222222" });
+            //client.Send(new MessageLogIn() { Login = "Shtorm", Password = "1111112" });
+            //client.Send(new MessageChangePasswordPassword() { OldPassword = "111111", NewPassword = "222222" });
+            //client.Send(new MessageLogIn() { Login = "RAMBO", Password = "111111" });
+            //client.Send(new MessageLogIn() { Login = "RAMBO", Password = "222222" });
 
             Console.ReadLine();
         }
@@ -40,12 +44,8 @@ namespace TestClient
         {
             switch (message.Type)
             {
-                case MessageType.Registration:
-                    break;
                 case MessageType.RegistrationAnswer:
                     Console.WriteLine("RegistrationAnswer - " + (message as MessageRegistrationAnswer));
-                    break;
-                case MessageType.LogIn:
                     break;
                 case MessageType.LogInAnswer:
                     Console.WriteLine("MessageLogInAnswer - " + (message as MessageLogInAnswer));
@@ -63,6 +63,9 @@ namespace TestClient
                 case MessageType.FinishGame:
                     break;
                 case MessageType.YourMove:
+                    break;
+                case MessageType.ChangePasswordAnswer:
+                    Console.WriteLine("ChangePasswordAnswer - " + (message as MessageChangePasswordAnswer));
                     break;
                 default:
                     break;

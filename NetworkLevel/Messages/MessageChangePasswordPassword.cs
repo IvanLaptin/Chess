@@ -6,15 +6,15 @@ using System.Text;
 namespace NetworkLevel.Messages
 {
     [Serializable]
-    class ChangePasswordSettings : Message
+    public class MessageChangePasswordPassword : Message
     {
         public override MessageType Type
         {
-            get { return MessageType.ChangePasswordSettings; }
+            get { return MessageType.ChangePassword; }
         }
 
-        public string Settings { get; set; }
-        //TODO ALL Settings
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
 
     }
 }

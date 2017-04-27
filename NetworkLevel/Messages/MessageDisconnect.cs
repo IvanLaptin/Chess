@@ -10,7 +10,7 @@ namespace NetworkLevel.Messages
     {
         public override MessageType Type
         {
-            get { return MessageType.ChangePasswordSettings; }
+            get { return MessageType.Disconnect; }
         }
 
     }
