@@ -20,7 +20,8 @@ namespace NetworkLevel.Messages
         FinishGame,
         YourMove,
         GetGameTables,
-        ChangePasswordSettings,
+        ChangePassword,
+        ChangePasswordAnswer,
         Disconnect
     }
 }

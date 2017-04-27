@@ -24,7 +24,14 @@ namespace NetworkLevel.Messages
 
          public override string ToString()
          {
-             return string.Format("Login - {0}, Email - {1}, FullName - {2}, ID - {3}", Login, Email, FullName, ID);
+             if (Answer)
+             {
+                 return string.Format("Login - {0}, Email - {1}, FullName - {2}, ID - {3}", Login, Email, FullName, ID);
+             }
+             else
+             {
+                 return string.Format("Reason - {0}", Reason);
+             }
          }
     }
 }

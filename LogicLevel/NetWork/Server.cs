@@ -27,7 +27,7 @@ namespace LogicLevel.NetWork
             }
             try
             {
-                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.121"), 2017);
+                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.97"), 2017);
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(addr);
                 serverSocket.Listen(5);
@@ -80,7 +80,7 @@ namespace LogicLevel.NetWork
                 Regex loginReg = new Regex(@"^.{3,}$");
                 Regex passwordReg = new Regex(@"^.{6,}$");
                 Regex emailReg = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-                Regex fullNameReg = new Regex(@"^.{8,}$");
+                Regex fullNameReg = new Regex(@"^.{5,}$");
                 bool regResult = false;
                 if (loginReg.IsMatch(login))
                 {
@@ -130,7 +130,7 @@ namespace LogicLevel.NetWork
                 }
                 else
                 {
-                    user.Send(new MessageLogInAnswer() { Answer = false });
+                    user.Send(new MessageLogInAnswer() { Answer = false, Reason = "Incorrect Login/Password" });
                 }
             }
             else if(message.Type == MessageType.LogOut)
@@ -141,12 +141,39 @@ namespace LogicLevel.NetWork
                     AccountList.Instance.Accounts.Remove(account);
                 }
             }
-            else if(message.Type == MessageType.ChangePasswordSettings)
+            else if(message.Type == MessageType.ChangePassword)
             {
                 var account = AccountList.Instance.Accounts.FirstOrDefault(x => x.User == user);
                 if(account != null)
                 {
-                    //TODO CHANGE PASSWORD
+                    var newPassword = (message as MessageChangePasswordPassword).NewPassword;
+                    var oldPassword = (message as MessageChangePasswordPassword).OldPassword;
+
+                    var logResult = connection.LogIn(account.Login, oldPassword);
+                    if (logResult == null)
+                    {
+                        user.Send(new MessageChangePasswordAnswer() { Answer = false, Reason = "Incorrect old passwort" });
+                    }
+                    else
+                    {
+                        Regex passwordReg = new Regex(@"^.{6,}$");
+                        if (!passwordReg.IsMatch(newPassword))
+                        {
+                            user.Send(new MessageChangePasswordAnswer() { Answer = false, Reason = "Incorrect new password (less 6 symbols)" });
+                        }
+                        else
+                        {
+                            var changePassResult = connection.ChangePassword(account.Login, newPassword);
+                            if (changePassResult)
+                            {
+                                user.Send(new MessageChangePasswordAnswer() { Answer = true });
+                            }
+                            else
+                            {
+                                user.Send(new MessageChangePasswordAnswer() { Answer = false, Reason = "DB error" });
+                            }
+                        }
+                    }
                 }
             }
 
