@@ -65,5 +65,26 @@ namespace DataLevel.Logic
 				}
 			}
 		}
-	}
+
+        public bool ChangePassword(string login, string password)
+        {
+            using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                //UPDATE table_name
+                //SET column1 = value1, column2 = value2, ...
+                //WHERE condition;
+                sb.Append("UPDATE [Account] SET [Password] = @Password WHERE [Login] = @Login");
+                String sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Password", password);
+                    command.Parameters.AddWithValue("@Login", login);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected != 0;
+                }
+            }
+        }
+    }
 }

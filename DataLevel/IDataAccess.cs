@@ -9,8 +9,8 @@ namespace DataLevel
 	public interface IDataAccess
 	{
 		AccountProxy LogIn(string login, string password);
-		bool SignUp(string login, string password, string email, string fullname);
-
+        bool SignUp(string login, string password, string email, string fullname);
+        bool ChangePassword(string login, string password);
 
 	}
 }

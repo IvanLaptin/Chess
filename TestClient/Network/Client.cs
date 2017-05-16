@@ -17,7 +17,7 @@ namespace TestClient.Network
             {
                 if (clientSocket != null) return;
 
-                EndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.69"), 2017);
+                EndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.64"), 2017);
                 clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                 clientSocket.Connect(addr);

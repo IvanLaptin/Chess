@@ -6,11 +6,11 @@ using System.Text;
 namespace NetworkLevel.Messages
 {
     [Serializable]
-    public class MessageRegistrationAnswer : Message
+    public class MessageChangePasswordAnswer : Message
     {
         public override MessageType Type
         {
-            get { return MessageType.RegistrationAnswer; }
+            get { return MessageType.ChangePasswordAnswer; }
         }
 
         public bool Answer { get; set; }
@@ -18,7 +18,15 @@ namespace NetworkLevel.Messages
 
         public override string ToString()
         {
-            return string.Format("{0}, {1}", Answer, Reason);
+            if (Answer)
+            {
+                return string.Format("Answer: {0}", Answer);
+            }
+            else
+            {
+                return string.Format("Answer: {0}, Reason: {1}", Answer, Reason);
+            }
         }
+
     }
 }

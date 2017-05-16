@@ -41,7 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NetWork\Account.cs" />
+    <Compile Include="NetWork\AccountList.cs" />
+    <Compile Include="NetWork\GameCore\Room.cs" />
+    <Compile Include="NetWork\GameCore\RoomList.cs" />
+    <Compile Include="NetWork\GameCore\StatusGameType.cs" />
     <Compile Include="NetWork\Server.cs" />
+    <Compile Include="NetWork\StatusType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

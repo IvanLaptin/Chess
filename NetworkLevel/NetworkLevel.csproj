@@ -41,12 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Messages\Message.cs" />
+    <Compile Include="Messages\MessageChangePasswordAnswer.cs" />
+    <Compile Include="Messages\MessageDisconnect.cs" />
     <Compile Include="Messages\MessageFinishGame.cs" />
+    <Compile Include="Messages\MessageGetGameTables.cs" />
     <Compile Include="Messages\MessageLogIn.cs" />
     <Compile Include="Messages\MessageLogInAnswer.cs" />
     <Compile Include="Messages\MessageLogOut.cs" />
     <Compile Include="Messages\MessageRegistration.cs" />
     <Compile Include="Messages\MessageRegistrationAnswer.cs" />
+    <Compile Include="Messages\MessageChangePasswordPassword.cs" />
     <Compile Include="Messages\MessageStartGameOnline.cs" />
     <Compile Include="Messages\MessageStartGameOnlineAnswer.cs" />
     <Compile Include="Messages\MessageStartTheGameWithTheBot.cs" />

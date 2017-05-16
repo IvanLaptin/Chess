@@ -18,6 +18,10 @@ namespace NetworkLevel.Messages
         StartGameOnlineAnswer,
         Move,
         FinishGame,
-        YourMove
+        YourMove,
+        GetGameTables,
+        ChangePassword,
+        ChangePasswordAnswer,
+        Disconnect
     }
 }

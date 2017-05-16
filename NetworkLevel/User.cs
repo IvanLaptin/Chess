@@ -52,7 +52,7 @@ namespace NetworkLevel
         {
             try
             {
-                //Console.WriteLine("Client " + clientSocket.RemoteEndPoint + " disconnected");
+                Console.WriteLine("Client " + clientSocket.RemoteEndPoint + " disconnected");
                 if (clientSocket.Connected)
                 {
                     clientSocket.Shutdown(SocketShutdown.Both);
@@ -62,7 +62,7 @@ namespace NetworkLevel
             }
             catch (Exception err)
             {
-                Console.WriteLine(err.Message);
+                //Console.WriteLine(err.Message);
             }
         }
 
@@ -70,6 +70,7 @@ namespace NetworkLevel
         {
             try
             {
+                if (clientSocket == null) return;
                 while (clientSocket.Connected)
                 {
                     byte[] data = new byte[clientSocket.ReceiveBufferSize];
@@ -85,7 +86,6 @@ namespace NetworkLevel
             }
             catch (Exception err)
             {
-                Console.WriteLine(err.Message);
                 Disconnect(err.Message);
             }
         }
