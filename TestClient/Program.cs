@@ -24,9 +24,35 @@ namespace TestClient
 
             Console.WriteLine("Enter exit to exit");
 
-            //client.Send(new MessageRegistration() { FullName = "Ivan Laptin", Email = "ivan@gmail.com", Login = "Shtorm", Password = "111" });
-            //client.Send(new MessageRegistration() { FullName = "RAMBO", Email = "rembo@gmail.com", Login = "rambo", Password = "111111" });
-            client.Send(new MessageLogIn() { Login = "rambo", Password = "222222" });
+            //client.Send(new MessageRegistration() { FullName = "RAMBO", Email = "rembo1@gmail.com", Login = "rambo1", Password = "111111" });
+            //client.Send(new MessageRegistration() { FullName = "RAMBO2", Email = "rembo2@gmail.com", Login = "rambo2", Password = "111111" });
+            //client.Send(new MessageRegistration() { FullName = "RAMBO3", Email = "rembo3@gmail.com", Login = "rambo3", Password = "111111" });
+
+
+
+            //client.Send(new MessageLogIn() { Login = "rambo1", Password = "111111" });
+            //client.Send(new MessageStartGameOnline());
+
+
+
+            //client.Send(new MessageLogIn() { Login = "rambo2", Password = "111111" });
+            //client.Send(new MessageStartGameOnline());
+
+            client.Send(new MessageLogIn() { Login = "rambo3", Password = "111111" });
+            client.Send(new MessageStartGameOnline());
+
+
+
+
+
+            //client.Send(new MessageRegistration() { FullName = "RAMBO3", Email = "rembo@gmail.com", Login = "rambo", Password = "111111" });
+
+
+            //client.Send(new MessageLogIn() { Login = "rambo", Password = "222222" });
+            
+            
+
+            
             //client.Send(new MessageLogIn() { Login = "Shtorm", Password = "1111112" });
             //client.Send(new MessageChangePasswordPassword() { OldPassword = "111111", NewPassword = "222222" });
             //client.Send(new MessageLogIn() { Login = "RAMBO", Password = "111111" });
@@ -57,6 +83,7 @@ namespace TestClient
                 case MessageType.StartGameOnline:
                     break;
                 case MessageType.StartGameOnlineAnswer:
+                    Console.WriteLine((message as MessageStartGameOnlineAnswer).Answer);
                     break;
                 case MessageType.Move:
                     break;

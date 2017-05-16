@@ -10,7 +10,8 @@ using System.Threading;
 using DataLevel;
 using System.Text.RegularExpressions;
 using DataLevel.Model;
-
+using LogicLevel.NetWork.GameCore;
+using NetworkLevel.Messages.GameLogic;
 namespace LogicLevel.NetWork
 {
     public class Server
@@ -178,11 +179,32 @@ namespace LogicLevel.NetWork
             }
             else if(message.Type == MessageType.StartGameOnline)
             {
-
+                AccountList.Instance.Accounts.FirstOrDefault(u => u.User == user).Type = StatusType.Wait;
+                var accounts = AccountList.Instance.Accounts.Where(x => x.Type == StatusType.Wait).ToList();
+                //accounts.ForEach(x => x.Type = StatusType.Wait);
+                if (AccountList.Instance.Accounts.Where(u=> u.Type == StatusType.Wait).Count() == GameCore.GameCore.RoomCapacity)
+                {
+                    RoomList.Instance.Rooms.Add(new Room() { Accounts = accounts });
+                    SendAll(new MessageStartGameOnlineAnswer() { Accounts = accounts, Answer = StartAnswerType.Start }, accounts);
+                }
+                else
+                {
+                    AccountList.Instance.Accounts.FirstOrDefault(x => x.User == user).Type = StatusType.Wait;
+                    SendAll(new MessageStartGameOnlineAnswer() { Answer = StartAnswerType.Wait }, accounts);
+                }
+            }
+            else if(message.Type == MessageType.Move)
+            {
+                
             }
 
 
+        }
 
+
+        public void SendAll(Message mes, List<Account> accounts)
+        {
+            accounts.ForEach(a => a.User.Send(mes));
         }
 
         public void Stop()
