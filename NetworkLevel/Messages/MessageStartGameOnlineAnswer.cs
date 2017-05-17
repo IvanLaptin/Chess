@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkLevel.Messages.GameLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,8 +15,7 @@ namespace NetworkLevel.Messages
         }
 
         public StartAnswerType Answer { get; set; }
-
-
+        public List<Account> Accounts { get; set; }
         
     }
 }

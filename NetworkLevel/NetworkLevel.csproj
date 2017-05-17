@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\GameLogic\Account.cs" />
+    <Compile Include="Messages\GameLogic\StatusType.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\MessageChangePasswordAnswer.cs" />
     <Compile Include="Messages\MessageDisconnect.cs" />

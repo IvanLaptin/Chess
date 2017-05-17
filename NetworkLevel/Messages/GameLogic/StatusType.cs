@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace LogicLevel.NetWork
+namespace NetworkLevel.Messages.GameLogic
 {
     public enum StatusType
     {

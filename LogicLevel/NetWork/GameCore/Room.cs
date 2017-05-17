@@ -1,4 +1,5 @@
 ﻿using NetworkLevel;
+using NetworkLevel.Messages.GameLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,9 @@ namespace LogicLevel.NetWork.GameCore
                 return ++tmp;
             }
         }
-        public User User1 { get; set; }
-        public User User2 { get; set; }
-        StatusGameType GameStatus { get; set; }
+        public List<Account> Accounts { get; set; }
+
+
+
     }
 }
