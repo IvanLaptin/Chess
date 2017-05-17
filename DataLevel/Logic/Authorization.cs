@@ -21,7 +21,7 @@ namespace DataLevel.Logic
 				connection.Open();
 				StringBuilder sb = new StringBuilder();
 				sb.Append(string.Format("SELECT [Id], [Login], [Password], [Email], [FullName]" +
-				"FROM [chessSql].[dbo].[Account] where [Login] = '{0}' or [Password] = '{1}';", login, password));
+				"FROM [chessSql].[dbo].[Account] where [Login] = '{0}' and [Password] = '{1}';", login, password));
 				String sql = sb.ToString();
 
 				using (SqlCommand command = new SqlCommand(sql, connection))
@@ -72,9 +72,7 @@ namespace DataLevel.Logic
             {
                 connection.Open();
                 StringBuilder sb = new StringBuilder();
-                //UPDATE table_name
-                //SET column1 = value1, column2 = value2, ...
-                //WHERE condition;
+
                 sb.Append("UPDATE [Account] SET [Password] = @Password WHERE [Login] = @Login");
                 String sql = sb.ToString();
                 using (SqlCommand command = new SqlCommand(sql, connection))
@@ -86,5 +84,36 @@ namespace DataLevel.Logic
                 }
             }
         }
-    }
+
+
+		public bool IsBusy(string login, string email)
+		{
+			using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
+			{
+				connection.Open();
+				StringBuilder sb = new StringBuilder();
+				sb.Append(string.Format("SELECT [Id], [Login], [Email]" +
+				"FROM [chessSql].[dbo].[Account] where [Login] = '{0}' or [Email] = '{1}';", login, email));
+				String sql = sb.ToString();
+
+				using (SqlCommand command = new SqlCommand(sql, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							AccountProxy account = new AccountProxy();
+							account.Id = reader.GetInt32(0);
+							account.Login = reader.GetString(1);
+							account.Email = reader.GetString(2);
+
+							return (account.Login == login || account.Email == email);
+							
+						}
+						return false;
+					}
+				}
+			}
+		}
+	}
 }

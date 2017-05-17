@@ -47,8 +47,11 @@
     <Compile Include="DbSetings.cs" />
     <Compile Include="IDataAccess.cs" />
     <Compile Include="Interface\IAuthorization.cs" />
+    <Compile Include="Interface\IMatches.cs" />
     <Compile Include="Logic\Authorization.cs" />
+    <Compile Include="Logic\Matches.cs" />
     <Compile Include="Model\AccountProxy.cs" />
+    <Compile Include="Model\MatcheProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

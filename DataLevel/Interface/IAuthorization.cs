@@ -6,12 +6,14 @@ using System.Text;
 
 namespace DataLevel.Interface
 {
-	interface IAuthorization
+	public interface IAuthorization
 	{
 		AccountProxy LogIn(string login, string password);
 
         bool SignUp(string login, string password, string email, string fullname);
         bool ChangePassword(string login, string password);
+
+		bool IsBusy(string login, string email);
 
 	}
 }
