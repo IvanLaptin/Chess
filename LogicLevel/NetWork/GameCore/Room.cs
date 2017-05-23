@@ -32,7 +32,9 @@ namespace LogicLevel.NetWork.GameCore
 
         public void RequestForStep(Player player,Step step)
         {
-
+            Console.WriteLine("RequestForStep");
+            var nextPlayer = Players.FirstOrDefault(x => x.Id != player.Id);
+            AccountList.Instance.Accounts.FirstOrDefault(x => x.Id == nextPlayer.Id).User.Send(new MessageRequestForStep());
         }
 
 

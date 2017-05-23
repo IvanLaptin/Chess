@@ -5,11 +5,13 @@ using System.Text;
 
 namespace NetworkLevel.Messages
 {
+    [Serializable]
     public class MessageRequestForStep : Message
     {
         public override MessageType Type
         {
             get { return MessageType.RequestStep; }
         }
+
     }
 }

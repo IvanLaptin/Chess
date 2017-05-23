@@ -5,6 +5,7 @@ using System.Text;
 using TestClient.Network;
 using NetworkLevel.Messages;
 using DataLevel;
+using NetworkLevel.Messages.GameLogic;
 
 namespace TestClient
 {
@@ -77,6 +78,10 @@ namespace TestClient
                     Console.WriteLine("MessageLogInAnswer - " + (message as MessageLogInAnswer));
                     client.Send(new MessageStartGameOnline());
                     break;
+                case MessageType.RequestStep:
+                    Console.WriteLine("RequestStep");
+                    client.Send(new MessageAnswerRequestForStep() { Step = new Step(1, 1) });
+                    break;
                 case MessageType.LogOut:
                     break;
                 case MessageType.StartGameWithTheBot:
@@ -86,7 +91,6 @@ namespace TestClient
                 case MessageType.StartGameOnlineAnswer:
                     Console.WriteLine((message as MessageStartGameOnlineAnswer).Answer);
                     break;
-                
                 case MessageType.FinishGame:
                     break;
                 case MessageType.YourMove:
