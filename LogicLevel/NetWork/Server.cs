@@ -28,7 +28,7 @@ namespace LogicLevel.NetWork
             }
             try
             {
-                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.64"), 2017);
+                IPEndPoint addr = new IPEndPoint(IPAddress.Parse("10.6.6.85"), 2017);
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(addr);
                 serverSocket.Listen(5);
@@ -181,11 +181,15 @@ namespace LogicLevel.NetWork
             {
                 AccountList.Instance.Accounts.FirstOrDefault(u => u.User == user).Type = StatusType.Wait;
                 var accounts = AccountList.Instance.Accounts.Where(x => x.Type == StatusType.Wait).ToList();
-                //accounts.ForEach(x => x.Type = StatusType.Wait);
                 if (AccountList.Instance.Accounts.Where(u=> u.Type == StatusType.Wait).Count() == GameCore.GameCore.RoomCapacity)
                 {
                     RoomList.Instance.Rooms.Add(new Room() { Accounts = accounts });
-                    SendAll(new MessageStartGameOnlineAnswer() { Accounts = accounts, Answer = StartAnswerType.Start }, accounts);
+                    List<string> PlayersLogin = new List<string>();
+                    foreach (var item in accounts)
+                    {
+                        PlayersLogin.Add(item.Login);
+                    }
+                    SendAll(new MessageStartGameOnlineAnswer() { PlayersLogin = PlayersLogin, Answer = StartAnswerType.Start }, accounts);
                 }
                 else
                 {
