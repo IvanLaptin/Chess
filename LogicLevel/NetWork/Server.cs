@@ -183,7 +183,12 @@ namespace LogicLevel.NetWork
                 var accounts = AccountList.Instance.Accounts.Where(x => x.Type == StatusType.Wait).ToList();
                 if (AccountList.Instance.Accounts.Where(u=> u.Type == StatusType.Wait).Count() == GameCore.GameCore.RoomCapacity)
                 {
-                    RoomList.Instance.Rooms.Add(new Room() { Accounts = accounts });
+
+                    var room = new Room() { Players = Player.GetListPlayers(accounts) };
+                    RoomList.Instance.Rooms.Add(room);
+                    room.Start();
+
+
                     List<string> PlayersLogin = new List<string>();
                     foreach (var item in accounts)
                     {
@@ -197,13 +202,18 @@ namespace LogicLevel.NetWork
                     SendAll(new MessageStartGameOnlineAnswer() { Answer = StartAnswerType.Wait }, accounts);
                 }
             }
-            else if(message.Type == MessageType.Move)
+            else if(message.Type == MessageType.AnswerStep)
             {
-                
+                var account = AccountList.Instance.Accounts.FirstOrDefault(u => u.User == user);
+                var room = RoomList.Instance.Rooms.FirstOrDefault(x => x.Players.FirstOrDefault(u => u.Id == account.Id) != null);
+                room.RequestForStep(room.Players.FirstOrDefault(x=> x.Id == account.Id), (message as MessageAnswerRequestForStep).Step);
             }
 
 
         }
+
+
+        
 
 
         public void SendAll(Message mes, List<Account> accounts)
