@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace NetworkLevel
 {
+    [Serializable]
     public class User
     {
         public event Action<User, Message> MessageReceived;

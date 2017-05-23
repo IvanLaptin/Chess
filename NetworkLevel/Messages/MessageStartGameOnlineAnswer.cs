@@ -15,7 +15,7 @@ namespace NetworkLevel.Messages
         }
 
         public StartAnswerType Answer { get; set; }
-        public List<Account> Accounts { get; set; }
+        public List<string> PlayersLogin { get; set; }
         
     }
 }

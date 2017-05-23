@@ -10,14 +10,14 @@ namespace TestClient
 {
     class Program
     {
-        
+        static Client client;
         static void Main(string[] args)
         {
 
             Console.WriteLine("Press enter to connect");
             Console.ReadLine();
 
-            var client = new Client();
+            client = new Client();
             client.MessageReceived += client_MessageReceived;
             client.UserDisconnected += client_UserDisconnected;
             client.Connect();
@@ -39,7 +39,7 @@ namespace TestClient
             //client.Send(new MessageStartGameOnline());
 
             client.Send(new MessageLogIn() { Login = "rambo3", Password = "111111" });
-            client.Send(new MessageStartGameOnline());
+           
 
 
 
@@ -75,6 +75,7 @@ namespace TestClient
                     break;
                 case MessageType.LogInAnswer:
                     Console.WriteLine("MessageLogInAnswer - " + (message as MessageLogInAnswer));
+                    client.Send(new MessageStartGameOnline());
                     break;
                 case MessageType.LogOut:
                     break;
