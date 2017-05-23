@@ -184,17 +184,17 @@ namespace LogicLevel.NetWork
                 if (AccountList.Instance.Accounts.Where(u=> u.Type == StatusType.Wait).Count() == GameCore.GameCore.RoomCapacity)
                 {
 
-                    var room = new Room() { Players = Player.GetListPlayers(accounts) };
-                    RoomList.Instance.Rooms.Add(room);
-                    room.Start();
-
-
                     List<string> PlayersLogin = new List<string>();
                     foreach (var item in accounts)
                     {
                         PlayersLogin.Add(item.Login);
                     }
                     SendAll(new MessageStartGameOnlineAnswer() { PlayersLogin = PlayersLogin, Answer = StartAnswerType.Start }, accounts);
+
+
+                    var room = new Room() { Players = Player.GetListPlayers(accounts) };
+                    RoomList.Instance.Rooms.Add(room);
+                    room.Start();
                 }
                 else
                 {

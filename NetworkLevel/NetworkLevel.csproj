@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Messages\GameLogic\Account.cs" />
     <Compile Include="Messages\GameLogic\Board.cs" />
+    <Compile Include="Messages\GameLogic\Cell.cs" />
+    <Compile Include="Messages\GameLogic\Figure.cs" />
     <Compile Include="Messages\GameLogic\Player.cs" />
     <Compile Include="Messages\GameLogic\StartPositionType.cs" />
     <Compile Include="Messages\GameLogic\StatusType.cs" />

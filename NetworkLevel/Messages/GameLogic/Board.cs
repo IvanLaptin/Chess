@@ -5,12 +5,15 @@ using System.Text;
 
 namespace NetworkLevel.Messages.GameLogic
 {
+    [Serializable]
     public class Board
     {
-        int[,] board = new int[10,10]; 
+        List<Cell> Cells;
+      //  Cell[,] board = new Cell[10, 10]; 
 
         public Board()
         {
+            Cells = new List<Cell>();
             Initialize();
         }
 
@@ -20,9 +23,15 @@ namespace NetworkLevel.Messages.GameLogic
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    board[i, j] = j;
+                    Cells.Add(new Cell() { X = i ,Y = j });
                 }
             }
         }
     }
+
+
+    
+
+
+
 }
