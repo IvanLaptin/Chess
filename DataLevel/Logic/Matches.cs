@@ -42,21 +42,18 @@ namespace DataLevel.Logic
 
 		public void DeleteMatcheById(int id)
 		{
-			//using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
-			//{
-			//	connection.Open();
-			//	StringBuilder sb = new StringBuilder();
-			//	sb.Append("delete from [Matche] where [Id] = {0}", );
-			//	String sql = sb.ToString();
-			//	using (SqlCommand command = new SqlCommand(sql, connection))
-			//	{
-			//		command.Parameters.AddWithValue("@Account1Id", accountId1);
-			//		command.Parameters.AddWithValue("@Account2Id", accountId2);
-			//		command.Parameters.AddWithValue("@AccountWin", accountWinId);
-			//		int rowsAffected = command.ExecuteNonQuery();
-			//		//return rowsAffected != 0;
-			//	}
-			//}
+			using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
+			{
+				connection.Open();
+				StringBuilder sb = new StringBuilder();
+				sb.Append(string.Format("delete from [Matche] where [Id] = {0}", id));
+				String sql = sb.ToString();
+				using (SqlCommand command = new SqlCommand(sql, connection))
+				{
+					int rowsDeletedCount = command.ExecuteNonQuery();
+					//return rowsAffected != 0;
+				}
+			}
 		}
 
 		public MatcheProxy GetMatcheById(int id)
