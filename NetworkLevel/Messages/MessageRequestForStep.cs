@@ -5,11 +5,11 @@ using System.Text;
 
 namespace NetworkLevel.Messages
 {
-    public class MessageYourTurn : Message
+    public class MessageRequestForStep : Message
     {
         public override MessageType Type
         {
-            get { return MessageType.YourMove; }
+            get { return MessageType.RequestStep; }
         }
     }
 }

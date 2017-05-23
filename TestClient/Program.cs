@@ -86,8 +86,7 @@ namespace TestClient
                 case MessageType.StartGameOnlineAnswer:
                     Console.WriteLine((message as MessageStartGameOnlineAnswer).Answer);
                     break;
-                case MessageType.Move:
-                    break;
+                
                 case MessageType.FinishGame:
                     break;
                 case MessageType.YourMove:

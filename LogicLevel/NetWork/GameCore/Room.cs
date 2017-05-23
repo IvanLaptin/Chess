@@ -1,4 +1,5 @@
 ﻿using NetworkLevel;
+using NetworkLevel.Messages;
 using NetworkLevel.Messages.GameLogic;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,21 @@ namespace LogicLevel.NetWork.GameCore
                 return ++tmp;
             }
         }
-        public List<Account> Accounts { get; set; }
+        public List<Player> Players { get; set; }
+        Board Board;
 
+
+        public void Start()
+        {
+            Board = new Board();
+            AccountList.Instance.Accounts.FirstOrDefault(x => x.Id == Players.FirstOrDefault().Id).User.Send(new MessageRequestForStep());
+        }
+
+
+        public void RequestForStep(Player player,Step step)
+        {
+
+        }
 
 
     }
