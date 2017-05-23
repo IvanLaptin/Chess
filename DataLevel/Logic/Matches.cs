@@ -12,6 +12,16 @@ namespace DataLevel.Logic
 	{
 		public void CreateMatche(Model.AccountProxy account1, Model.AccountProxy account2, Model.AccountProxy accountWin)
 		{
+			CreateMatche(account1.Id, account2.Id, accountWin.Id);
+		}
+
+		public void CreateMatche(Model.MatcheProxy matche)
+		{
+			CreateMatche(matche.Account1, matche.Account2, matche.AccountWin);
+		}
+
+		public void CreateMatche(int accountId1, int accountId2, int accountWinId)
+		{
 			using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
 			{
 				connection.Open();
@@ -21,23 +31,32 @@ namespace DataLevel.Logic
 				String sql = sb.ToString();
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
-					command.Parameters.AddWithValue("@Account1Id", account1.Id);
-					command.Parameters.AddWithValue("@Account2Id", account2.Id);
-					command.Parameters.AddWithValue("@AccountWin", accountWin.Id);
+					command.Parameters.AddWithValue("@Account1Id", accountId1);
+					command.Parameters.AddWithValue("@Account2Id", accountId2);
+					command.Parameters.AddWithValue("@AccountWin", accountWinId);
 					int rowsAffected = command.ExecuteNonQuery();
 					//return rowsAffected != 0;
 				}
 			}
 		}
 
-		public void CreateMatche(Model.MatcheProxy matche)
-		{
-			CreateMatche(matche.Account1, matche.Account2, matche.AccountWin);
-		}
-
 		public void DeleteMatcheById(int id)
 		{
-			throw new NotImplementedException();
+			//using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
+			//{
+			//	connection.Open();
+			//	StringBuilder sb = new StringBuilder();
+			//	sb.Append("delete from [Matche] where [Id] = {0}", );
+			//	String sql = sb.ToString();
+			//	using (SqlCommand command = new SqlCommand(sql, connection))
+			//	{
+			//		command.Parameters.AddWithValue("@Account1Id", accountId1);
+			//		command.Parameters.AddWithValue("@Account2Id", accountId2);
+			//		command.Parameters.AddWithValue("@AccountWin", accountWinId);
+			//		int rowsAffected = command.ExecuteNonQuery();
+			//		//return rowsAffected != 0;
+			//	}
+			//}
 		}
 
 		public MatcheProxy GetMatcheById(int id)
@@ -57,9 +76,10 @@ namespace DataLevel.Logic
 						while (reader.Read())
 						{
 							MatcheProxy m = new MatcheProxy();
-							m.Account1 = GetAccountById(reader.GetInt32(0));
-							m.Account2 = GetAccountById(reader.GetInt32(1));
-							m.AccountWin = GetAccountById(reader.GetInt32(2));
+							m.Id = reader.GetInt32(0);
+							m.Account1 = GetAccountById(reader.GetInt32(1));
+							m.Account2 = GetAccountById(reader.GetInt32(2));
+							m.AccountWin = GetAccountById(reader.GetInt32(3));
 
 							return m;
 						}
@@ -102,12 +122,39 @@ namespace DataLevel.Logic
 
 		public List<MatcheProxy> GetMatchesAvalibelAccountId(int accountId)
 		{
-			throw new NotImplementedException();
+			var listId = new List<int>();
+			var matcheList = new List<MatcheProxy>();
+			using (var connection = new SqlConnection(DbSetings.GetConnectionString()))
+			{
+				connection.Open();
+				StringBuilder sb = new StringBuilder();
+				sb.Append(string.Format("SELECT [Id]" +
+				"FROM [chessSql].[dbo].[Matche] where [Account1Id] = {0} or [Account2Id] = {0};", accountId));
+				String sql = sb.ToString();
+
+				using (SqlCommand command = new SqlCommand(sql, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							MatcheProxy m = new MatcheProxy();
+							listId.Add(reader.GetInt32(0));
+						}
+					}
+				}
+			}
+
+			foreach (var item in listId)
+			{
+				matcheList.Add(GetMatcheById(item));
+			}
+			return matcheList;
 		}
 
 		public List<MatcheProxy> GetMatchesWinAccountId(int accountId)
 		{
-			throw new NotImplementedException();
+			return GetMatchesAvalibelAccountId(accountId).Where(m => m.AccountWin.Id == accountId).ToList();
 		}
 	}
 }
